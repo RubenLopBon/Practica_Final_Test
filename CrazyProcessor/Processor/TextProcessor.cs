@@ -37,8 +37,17 @@
         //Ruben
         private string CountUpperAndLowerCase(string text)
         {
-            String result = "El número de mayúsculas es: 0\n" +
-                "El número de minúsculas es: 0";
+            int countUpper = 0;
+            int countLower = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (char.IsUpper(text[i])) countUpper++;
+                if (char.IsLower(text[i])) countLower++;
+            }
+
+
+            String result = "El número de mayúsculas es: " + countUpper + "\n" +
+                "El número de minúsculas es: "+ countLower;
             return result;
         }
 
