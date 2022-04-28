@@ -15,5 +15,8 @@ namespace CrazyProcessor.Processor
 
         [Description("Invertir contenido")]
         ToTextInverser,
+
+        [Description("Contar palabras")]
+        WordCounter,
     }
 }

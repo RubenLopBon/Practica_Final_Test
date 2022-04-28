@@ -14,6 +14,8 @@
                     return this.CountUpperAndLowerCase(text);
                 case Operation.ToTextInverser:
                     return this.TextInverser(text);
+                case Operation.WordCounter:
+                    return this.WordCounter(text);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -32,7 +34,11 @@
 
         //Obligatorias
         //Marc
-
+        private string WordCounter(string text)
+        {
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            return text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length.ToString();
+        }
 
         //Ruben
         private string CountUpperAndLowerCase(string text)
