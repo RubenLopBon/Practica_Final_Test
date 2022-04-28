@@ -9,5 +9,11 @@ namespace CrazyProcessor.Processor
 
         [Description("Convertir a mayúsculas")]
         ToUpperCase,
+
+        [Description("Contar mayúsculas y minúsculas")]
+        ToCountCase,
+
+        [Description("Invertir contenido")]
+        ToTextInverser,
     }
 }
