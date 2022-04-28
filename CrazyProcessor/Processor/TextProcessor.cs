@@ -15,6 +15,7 @@
             }
         }
 
+        //Profe
         private string ConvertToLowerCase(string text)
         {
             return text.ToLowerInvariant();
@@ -24,5 +25,28 @@
         {
             return text.ToUpperInvariant();
         }
+
+        //Obligatorias
+        //Marc
+
+
+        //Rubén
+        private string CountUpperAndLowerCase(string text)
+        {
+            return text.ToUpperInvariant();
+        }
+
+
+        //Laura
+        private string TextInverser(string text)
+        {
+            return text.ToUpperInvariant();
+        }
+        //TDD(6)
+        //Marc
+
+        //Laura
+
+        //Rubén
     }
 }
