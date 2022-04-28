@@ -15,11 +15,6 @@
             }
         }
 
-        private string Get5Elements(string text)
-        {
-            return text.Substring(0, 5);
-        }
-
         private string ConvertToLowerCase(string text)
         {
             return text.ToLowerInvariant();
