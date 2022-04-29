@@ -32,16 +32,14 @@
             return text.ToUpperInvariant();
         }
 
-        //Obligatorias
-        //Marc
-        private string WordCounter(string text)
+        // ************************** FUNCIONALIDADES EXTRAS OBLIGATORIAS *************************
+        private string WordCounter(string text) // MARC //
         {
             char[] delimiters = new char[] { ' ', '\r', '\n' };
             return text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length.ToString();
         }
 
-        //Ruben
-        private string CountUpperAndLowerCase(string text)
+        private string CountUpperAndLowerCase(string text) // RUBÉN //
         {
             int countUpper = 0;
             int countLower = 0;
@@ -51,19 +49,25 @@
                 if (char.IsLower(text[i])) countLower++;
             }
 
-
             String result = "El número de mayúsculas es: " + countUpper + "\n" +
                 "El número de minúsculas es: "+ countLower;
             return result;
         }
 
-
-        //Laura
-        private string TextInverser(string text)
+        private string TextInverser(string text) // LAURA //
         {
-            return "Inverso";
+            char[] cArray = text.ToCharArray();
+            string reverse = String.Empty;
+
+            for (int i = cArray.Length - 1; i >= 0; i--)
+            {
+                reverse += cArray[i];
+            }
+
+            return reverse;
         }
-        //TDD(6)
+
+        // ************************ FUNCIONALIDADES TDD EXTRAS OBLIGATORIAS ***********************
         //Marc
 
         //Laura
