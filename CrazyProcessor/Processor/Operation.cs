@@ -18,5 +18,8 @@ namespace CrazyProcessor.Processor
 
         [Description("Contar palabras")]
         WordCounter,
+
+        [Description("Encriptar el texto")]
+        textEncrypter,
     }
 }

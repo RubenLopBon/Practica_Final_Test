@@ -16,6 +16,8 @@
                     return this.TextInverser(text);
                 case Operation.WordCounter:
                     return this.WordCounter(text);
+                case Operation.textEncrypter:
+                    return this.TextEncrypter(text);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -69,7 +71,35 @@
 
         // ************************ FUNCIONALIDADES TDD EXTRAS OBLIGATORIAS ***********************
         //Marc
+       
+        public string TextEncrypter(string text)
+        {
+     
+                text = text.Replace("a", "i");
+                text = text.Replace("e", "i");
+                text = text.Replace("i", "i");
+                text = text.Replace("o", "i");
+                text = text.Replace("u", "i");
 
+            
+                string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        
+                for(int i=0 ; i < texts.Length; i++)
+                {
+                    if(i%2 == 0 && i != 0)
+                    {
+                        texts[i] = texts[i].ToUpper();
+                    }
+                    else
+                    {
+                        texts[i] = texts[i].ToLower();
+                    }
+                }
+
+                return string.Join(" ", texts).Trim();
+        }
+
+      
         //Laura
 
         //Ruben
