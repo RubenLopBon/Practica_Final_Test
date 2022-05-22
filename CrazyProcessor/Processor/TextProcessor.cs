@@ -59,7 +59,7 @@
             }
 
             String result = "El número de mayúsculas es: " + countUpper + "\n" +
-                "El número de minúsculas es: "+ countLower;
+                "El número de minúsculas es: " + countLower;
             return result;
         }
 
@@ -78,37 +78,62 @@
 
         // ************************ FUNCIONALIDADES TDD EXTRAS OBLIGATORIAS ***********************
         //Marc
-       
+
         public string TextEncrypter(string text)
         {
-     
-                text = text.Replace("a", "i");
-                text = text.Replace("e", "i");
-                text = text.Replace("i", "i");
-                text = text.Replace("o", "i");
-                text = text.Replace("u", "i");
 
-            
-                string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        
-                for(int i=0 ; i < texts.Length; i++)
+            text = text.Replace("a", "i");
+            text = text.Replace("e", "i");
+            text = text.Replace("i", "i");
+            text = text.Replace("o", "i");
+            text = text.Replace("u", "i");
+
+
+            string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < texts.Length; i++)
+            {
+                if (i % 2 == 0 && i != 0)
                 {
-                    if(i%2 == 0 && i != 0)
-                    {
-                        texts[i] = texts[i].ToUpper();
-                    }
-                    else
-                    {
-                        texts[i] = texts[i].ToLower();
-                    }
+                    texts[i] = texts[i].ToUpper();
                 }
+                else
+                {
+                    texts[i] = texts[i].ToLower();
+                }
+            }
 
-                return string.Join(" ", texts).Trim();
+            return string.Join(" ", texts).Trim();
         }
 
-        public string EliminarBlancos(string text) // LAURA //
+        public string EliminarBlancos(string texto) // LAURA //
         {
-            return "Funcionalidad no desarrollada";
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            string[] palabras = texto.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            char[] letras; string frase = "";
+
+            if (palabras.Length == 0) throw new Exception("Conjunto de palabras incorrecto");
+
+            for (int i = 0; i <= palabras.Length - 1; i++)
+            {
+                letras = palabras[i].ToCharArray();
+                for (int l = 0; l < letras.Length; l++)
+                {
+                    if (!char.IsLetter(letras[l])) throw new Exception("Conjunto de palabras incorrecto");
+
+                    else if (l == 0)
+                    {
+                        if (char.IsLower(letras[0])) letras[0] = char.ToUpper(letras[0]);
+                    }
+
+                    else letras[l] = char.ToLower(letras[l]);
+
+                    frase += letras[l];
+                }
+
+            }
+
+            return frase;
         }
 
         public string InvertirPalabras(string text) // LAURA //
