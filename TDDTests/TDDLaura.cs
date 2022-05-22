@@ -2,6 +2,16 @@
 {
     public class TDDLaura
     {
+        // ************************** FUNCIONALIDAD TDD ELIMINAR BLANCOS **************************
+        /* 1. Separar palabras por blancos
+         * 2. Poner todas las letras en minúscula
+         * 3. Poner la primera letra de cada palabra en mayúscula
+         * 4. Eliminar espacios en blanco
+         * ----------------------------------------------------------------------------------------
+         * 5. Comprobar que existan palabras en el texto
+         * 6. Comprobar que todos los carácteres son letras
+         */
+
         [Theory]
         [InlineData("m", "M")]                                  // Caso: Minúscula por mayúscula
         [InlineData("M", "M")]                                  // Caso: Mayúscula se queda igual
@@ -14,13 +24,13 @@
         [InlineData("   Mi nombre es Laura", "MiNombreEsLaura")]// Caso: No está vacío --> Empieza por más de un espacio
         public void EliminarBlancos_PrimeraLetraMayusculaSinBlancos_Success(string texto, string resultadoEsperado)
         {
-            // Arrange 
+            // ARRANGE 
             var sut = new TextProcessor();
 
-            // Act 
+            // ACT
             string resultado = sut.EliminarBlancos(texto);
 
-            // Assert 
+            // ASSERT
             Assert.Equal(resultado, resultadoEsperado);
         }
 
@@ -34,22 +44,30 @@
         [InlineData("Mi nombre es Laura.")]                     // Caso: Carácter diferente al alfabeto --> Al final del texto
         public void EliminarBlancos_ExceptionSinPalabrasCarácteresInválidos_Success(string texto)
         {
-            // Arrange 
+            // ARRANGE 
             var sut = new TextProcessor();
 
-            // Act
+            // ACT
             var exception = Assert.Throws<Exception>(() => sut.EliminarBlancos(texto));
 
-            // Assert
+            // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
+
+        // ************************** FUNCIONALIDAD TDD INVERTIR PALABRAS *************************
+        /* 1. Separar palabras por mayúsculas
+         * 2. Invertir palabras
+         * ----------------------------------------------------------------------------------------
+         * 3. Comprobar que existan palabras en el texto
+         * 4. Comprobar que todos los carácteres son letras
+         */
 
         [Theory]
         [InlineData("MN", "M N")]                                       // Caso: Dos mayúsculas seguidas
         [InlineData("Mn", "nM")]                                        // Caso: Primera mayúscula
         [InlineData("mN", "m N")]                                       // Caso: Segunda mayúscula
         [InlineData("mn", "nm")]                                        // Caso: Ninguna mayúscula
-        [InlineData("mn mn", "nmnm")]                                   // Caso: Ninguna mayúscula --> Contiene espacios
+        [InlineData("mn bv", "vbnm")]                                   // Caso: Ninguna mayúscula --> Contiene espacios
 
         [InlineData("MiNombreEsLaura", "iM erbmoN sE aruaL")]           // Caso: Palabras --> Sin espacios
         [InlineData("Mi Nombre Es Laura", "iM erbmoN sE aruaL")]        // Caso: Palabras --> Con espacios
@@ -60,13 +78,13 @@
         [InlineData("   Mi nombre es Laura", "MiNombreEsLaura")]        // Caso: No está vacío --> Empieza por más de un espacio
         public void InvertirPalabras_PalabrasInversasPorMayusculas_Success(string texto, string resultadoEsperado)
         {
-            // Arrange 
+            // ARRANGE 
             var sut = new TextProcessor();
 
-            // Act 
+            // ACT
             string resultado = sut.InvertirPalabras(texto);
 
-            // Assert 
+            // ASSERT
             Assert.Equal(resultado, resultadoEsperado);
         }
 
@@ -80,13 +98,13 @@
         [InlineData("Mi nombre es Laura.")]                     // Caso: Carácter diferente al alfabeto --> Al final del texto
         public void InvertirPalabras_ExceptionSinPalabrasCarácteresInválidos_Success(string texto)
         {
-            // Arrange 
+            // ARRANGE
             var sut = new TextProcessor();
 
-            // Act
+            // ACT
             var exception = Assert.Throws<Exception>(() => sut.InvertirPalabras(texto));
 
-            // Assert
+            // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
     }
