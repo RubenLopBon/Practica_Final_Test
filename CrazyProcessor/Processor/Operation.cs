@@ -21,5 +21,11 @@ namespace CrazyProcessor.Processor
 
         [Description("Encriptar el texto")]
         textEncrypter,
+
+        [Description("Eliminar blancos")]
+        eliminarBlancos,
+
+        [Description("Invertir Palabras")]
+        invertirPalabras,
     }
 }

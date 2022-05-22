@@ -1,7 +1,4 @@
-
-
-
-namespace TDDtests
+namespace TDDTests
 {
     public class TDDMarc
     {

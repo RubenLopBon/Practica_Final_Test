@@ -10,14 +10,21 @@
                     return this.ConvertToLowerCase(text);
                 case Operation.ToUpperCase:
                     return this.ConvertToUpperCase(text);
+
                 case Operation.ToCountCase:
                     return this.CountUpperAndLowerCase(text);
                 case Operation.ToTextInverser:
                     return this.TextInverser(text);
                 case Operation.WordCounter:
                     return this.WordCounter(text);
+
                 case Operation.textEncrypter:
                     return this.TextEncrypter(text);
+
+                case Operation.eliminarBlancos:
+                    return this.EliminarBlancos(text);
+                case Operation.invertirPalabras:
+                    return this.InvertirPalabras(text);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -99,8 +106,15 @@
                 return string.Join(" ", texts).Trim();
         }
 
-      
-        //Laura
+        public string EliminarBlancos(string text) // LAURA //
+        {
+            return "Funcionalidad no desarrollada";
+        }
+
+        public string InvertirPalabras(string text) // LAURA //
+        {
+            return "Funcionalidad no desarrollada";
+        }
 
         //Ruben
     }
