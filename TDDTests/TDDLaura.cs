@@ -43,50 +43,49 @@
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
 
-        //[Theory]
-        //[InlineData("MN", "M N")]                                       // Caso: Dos mayúsculas seguidas
-        //[InlineData("Mn", "nM")]                                        // Caso: Primera mayúscula
-        //[InlineData("mN", "m N")]                                       // Caso: Segunda mayúscula
-        //[InlineData("mn", "nm")]                                        // Caso: Ninguna mayúscula
-        //[InlineData("mn bv", "vbnm")]                                   // Caso: Ninguna mayúscula --> Contiene espacios
+        [Theory]
+        [InlineData("MN", "M N")]
+        [InlineData("Mn", "nM")]
+        [InlineData("mN", "m N")]
+        [InlineData("mn", "nm")]
+        [InlineData("mn bv", "vbnm")]
 
-        //[InlineData("MiNombreEsLaura", "iM erbmoN sE aruaL")]           // Caso: Palabras --> Sin espacios
-        //[InlineData("Mi Nombre Es Laura", "iM erbmoN sE aruaL")]        // Caso: Palabras --> Con espacios
-        //[InlineData("Mi  Nombre    Es Laura", "iM erbmoN sE aruaL")]    // Caso: Palabras --> Con espacios de más
-        //[InlineData("Mi nombre Es laura", "erbmoniM arualsE")]          // Caso: Palabras --> Con espacios, no todas empiezan mayúsculas
+        [InlineData("MiNombreEsLaura", "iM erbmoN sE aruaL")]
+        [InlineData("Mi Nombre Es Laura", "iM erbmoN sE aruaL")]
+        [InlineData("Mi  Nombre    Es Laura", "iM erbmoN sE aruaL")]
+        [InlineData("Mi nombre Es laura", "erbmoniM arualsE")]
+        [InlineData(" Mi nombre es Laura", "seerbmoniM aruaL")]
+        [InlineData("   Mi nombre es Laura", "seerbmoniM aruaL")]
+        public void InvertirPalabras_PalabrasInversasPorMayusculas_Success(string texto, string resultadoEsperado)
+        {
+            // ARRANGE 
+            var sut = new TextProcessor();
 
-        //[InlineData(" Mi nombre es Laura", "MiNombreEsLaura")]          // Caso: No está vacío --> Empieza por espacio
-        //[InlineData("   Mi nombre es Laura", "MiNombreEsLaura")]        // Caso: No está vacío --> Empieza por más de un espacio
-        //public void InvertirPalabras_PalabrasInversasPorMayusculas_Success(string texto, string resultadoEsperado)
-        //{
-        //    // ARRANGE 
-        //    var sut = new TextProcessor();
+            // ACT
+            string resultado = sut.InvertirPalabras(texto);
 
-        //    // ACT
-        //    string resultado = sut.InvertirPalabras(texto);
+            // ASSERT
+            Assert.Equal(resultado, resultadoEsperado);
+        }
 
-        //    // ASSERT
-        //    Assert.Equal(resultado, resultadoEsperado);
-        //}
+        [Theory]
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("   ")]
 
-        //[Theory]
-        //[InlineData("")]                                        // Caso: Está vacío
-        //[InlineData(" ")]                                       // Caso: Está vacío --> Empieza por espacio
-        //[InlineData("   ")]                                     // Caso: Está vacío --> Empieza por espacios de más
+        [InlineData("??")]
+        [InlineData("Mi n0mbr3 es Laura")]
+        [InlineData("Mi nombre es Laura.")]
+        public void InvertirPalabras_ExceptionSinPalabrasCarácteresInválidos_Success(string texto)
+        {
+            // ARRANGE
+            var sut = new TextProcessor();
 
-        //[InlineData("??")]                                      // Caso: Carácter diferente al alfabeto
-        //[InlineData("Mi n0mbr3 es Laura")]                      // Caso: Carácter diferente al alfabeto --> Entre el texto
-        //[InlineData("Mi nombre es Laura.")]                     // Caso: Carácter diferente al alfabeto --> Al final del texto
-        //public void InvertirPalabras_ExceptionSinPalabrasCarácteresInválidos_Success(string texto)
-        //{
-        //    // ARRANGE
-        //    var sut = new TextProcessor();
+            // ACT
+            var exception = Assert.Throws<Exception>(() => sut.InvertirPalabras(texto));
 
-        //    // ACT
-        //    var exception = Assert.Throws<Exception>(() => sut.InvertirPalabras(texto));
-
-        //    // ASSERT
-        //    Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
-        //}
+            // ASSERT
+            Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
+        }
     }
 }

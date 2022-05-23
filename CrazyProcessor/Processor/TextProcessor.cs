@@ -117,28 +117,52 @@
             for (int i = 0; i <= palabras.Length - 1; i++)
             {
                 letras = palabras[i].ToCharArray();
-                for (int l = 0; l < letras.Length; l++)
+                for (int j = 0; j < letras.Length; j++)
                 {
-                    if (!char.IsLetter(letras[l])) throw new Exception("Conjunto de palabras incorrecto");
+                    if (!char.IsLetter(letras[j])) throw new Exception("Conjunto de palabras incorrecto");
 
-                    else if (l == 0)
+                    else if (j == 0)
                     {
                         if (char.IsLower(letras[0])) letras[0] = char.ToUpper(letras[0]);
                     }
 
-                    else letras[l] = char.ToLower(letras[l]);
+                    else letras[j] = char.ToLower(letras[j]);
 
-                    frase += letras[l];
+                    frase += letras[j];
                 }
-
             }
-
             return frase;
         }
 
         public string InvertirPalabras(string text) // LAURA //
         {
-            return "Funcionalidad no desarrollada";
+            string aux = text.Replace(" ", "");
+            string frase = "";
+
+            if (aux.Length == 0) throw new Exception("Conjunto de palabras incorrecto");
+
+            for (int i = 0; i < aux.Length; i++)
+            {
+                if (!char.IsLetter(aux[i])) throw new Exception("Conjunto de palabras incorrecto");
+                else if (char.IsUpper(aux[i])) frase += " ";
+
+                frase += aux[i];
+            }
+
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            string[] palabras = frase.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            char[] letras; string reverse;
+
+            frase = "";
+            for (int j = 0; j < palabras.Length; j++)
+            {
+                letras = palabras[j].ToCharArray();
+                Array.Reverse(letras);
+                reverse = new string(letras);
+
+                frase += reverse + " ";
+            }
+            return frase.Trim();
         }
 
         //Ruben
