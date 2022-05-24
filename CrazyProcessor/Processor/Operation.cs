@@ -13,7 +13,7 @@ namespace CrazyProcessor.Processor
         [Description("Contar mayúsculas y minúsculas")]
         ToCountCase,
 
-        [Description("Invertir contenido")]
+        [Description("Invertir contenido alfanumérico")]
         ToTextInverser,
 
         [Description("Contar palabras")]
@@ -23,9 +23,9 @@ namespace CrazyProcessor.Processor
         textEncrypter,
 
         [Description("Eliminar blancos con palabras en mayúsculas")]
-        eliminarBlancos,
+        EliminarBlancos,
 
         [Description("Invertir palabras separadas por mayúsculas")]
-        invertirPalabras,
+        InvertirPalabras,
     }
 }

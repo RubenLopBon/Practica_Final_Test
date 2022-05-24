@@ -17,7 +17,7 @@
             var sut = new TextProcessor();
 
             // ACT
-            string resultado = sut.EliminarBlancos(texto);
+            string resultado = sut.ProcessText(texto, Operation.EliminarBlancos);
 
             // ASSERT
             Assert.Equal(resultado, resultadoEsperado);
@@ -37,7 +37,7 @@
             var sut = new TextProcessor();
 
             // ACT
-            var exception = Assert.Throws<Exception>(() => sut.EliminarBlancos(texto));
+            var exception = Assert.Throws<Exception>(() => sut.ProcessText(texto, Operation.EliminarBlancos));
 
             // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
@@ -62,7 +62,7 @@
             var sut = new TextProcessor();
 
             // ACT
-            string resultado = sut.InvertirPalabras(texto);
+            string resultado = sut.ProcessText(texto, Operation.InvertirPalabras);
 
             // ASSERT
             Assert.Equal(resultado, resultadoEsperado);
@@ -82,7 +82,7 @@
             var sut = new TextProcessor();
 
             // ACT
-            var exception = Assert.Throws<Exception>(() => sut.InvertirPalabras(texto));
+            var exception = Assert.Throws<Exception>(() => sut.ProcessText(texto, Operation.InvertirPalabras));
 
             // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);

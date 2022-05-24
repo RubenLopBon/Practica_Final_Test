@@ -21,9 +21,9 @@
                 case Operation.textEncrypter:
                     return this.TextEncrypter(text);
 
-                case Operation.eliminarBlancos:
+                case Operation.EliminarBlancos:
                     return this.EliminarBlancos(text);
-                case Operation.invertirPalabras:
+                case Operation.InvertirPalabras:
                     return this.InvertirPalabras(text);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
@@ -108,7 +108,7 @@
             return string.Join(" ", texts).Trim();
         }
 
-        public string EliminarBlancos(string texto) // LAURA //
+        private string EliminarBlancos(string texto) // LAURA //
         {
             char[] delimiters = new char[] { ' ', '\r', '\n' };
             string[] palabras = texto.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
@@ -136,7 +136,7 @@
             return frase;
         }
 
-        public string InvertirPalabras(string text) // LAURA //
+        private string InvertirPalabras(string text) // LAURA //
         {
             string aux = text.Replace(" ", "");
             string frase = "";
