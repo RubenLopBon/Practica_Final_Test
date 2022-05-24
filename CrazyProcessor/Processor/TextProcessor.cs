@@ -63,7 +63,7 @@
             return result;
         }
 
-        private string TextInverser(string text) // LAURA //
+        public string TextInverser(string text) // LAURA //
         {
             char[] cArray = text.ToCharArray();
             string reverse = String.Empty;
