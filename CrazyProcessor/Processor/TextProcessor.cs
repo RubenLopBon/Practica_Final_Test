@@ -63,13 +63,15 @@
             return result;
         }
 
-        public string TextInverser(string text) // LAURA //
+        private string TextInverser(string text) // LAURA //
         {
             char[] cArray = text.ToCharArray();
             string reverse = String.Empty;
 
             for (int i = cArray.Length - 1; i >= 0; i--)
             {
+                if (!char.IsLetterOrDigit(cArray[i]) && !char.IsWhiteSpace(cArray[i])) 
+                    throw new Exception("Conjunto de palabras incorrecto");
                 reverse += cArray[i];
             }
 
