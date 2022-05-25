@@ -5,6 +5,7 @@
 
 
         [Fact]
+        //public void ManageLogin_UsuarioRegistradoYContraseñaCorrecta_Success()
         public void ManageLogin_UsuarioRegistradoYContraseñaCorrecta_Success()
         {
             // ARRANGE 
@@ -25,13 +26,14 @@
             ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
 
             //Mock<IAppService> AppService = new Mock<IAppService>();
+            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("q");
 
-            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
+            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object, 
                 FileProvider.Object, TextProcessor.Object);
 
             //Act
             //sut.ManageLogin();
-
+            sut.StartApp();
             //Assert
             //Se puede mirar de separar en 3 tests
             ConsoleAdapter.Verify(x => x.ReadEmail(),
@@ -46,7 +48,7 @@
         }
 
         [Fact]
-        public void ManageLogin__EmailRegistradoYIncontraseñaCorrecta_Success()
+        public void ManageLogin_EmailRegistradoYIncontraseñaCorrecta_Success()
         {
             // ARRANGE 
             Mock<IAppService> AppService = new Mock<IAppService>();
@@ -107,13 +109,14 @@
             // ASSERT
 
         }
-
         // ********************************* MANAGE FILE PROCESSOR ********************************
         // ############# Test relacionados con la introducción del nombre del archivo #############
         [Fact]
         public void ManageFileProcessor_ExcepcionNombreArchivoNoExistente_Succes()
         {
             // ARRANGE 
+            Mock<IAppService> AppService = new Mock<IAppService>();
+            // AppService sut = new AppService();
             Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
             string email = "prueba@test.es", contraseña = "contraseña", nombre = "Laura";
             ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
@@ -233,7 +236,6 @@
             // ACT
 
             // ASSERT
-
         }
     }
 }
