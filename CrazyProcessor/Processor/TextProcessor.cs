@@ -1,4 +1,7 @@
-﻿namespace CrazyProcessor.Processor
+﻿using System.Text;
+using System.Text.RegularExpressions;
+
+namespace CrazyProcessor.Processor
 {
     public class TextProcessor : ITextProcessor
     {
@@ -29,6 +32,10 @@
 
                 case Operation.ContadorPorPalabra:
                     return this.ContadorPorPalabra(text);
+
+                case Operation.ContadorVocales:
+                    return this.ContadorVocales(text);
+                    
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -193,6 +200,31 @@
             solution = solution.TrimEnd();
             return solution;
         }
- 
+       
+        private string ContadorVocales(string text)
+        {
+            text = Regex.Replace(text.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "");
+            char[] vocales = { 'a', 'e', 'i', 'o', 'u' };
+            int[] contador = new int[5];
+            for (int i = 0; i < text.Length; i++)
+            {
+                for (int j = 0; j < vocales.Length; j++)
+                {
+                    if (char.ToLower(text[i]) == vocales[j])
+                    {
+                        contador[j]++;
+                    }
+                }
+            }
+            string solution = "";
+            for (int i = 0; i < vocales.Length; i++)
+            {
+                solution += vocales[i] + ":" + contador[i] + " ";
+            }
+            solution = solution.TrimEnd();
+            return solution;
+        }
+        
+
     }
 }

@@ -29,6 +29,10 @@ namespace CrazyProcessor.Processor
         InvertirPalabras,
 
         [Description("Añade el numero de letras de una palabra al final de cada palabra")]
-        ContadorPorPalabra
+        ContadorPorPalabra,
+
+        [Description("Muestra el numero de vocales")]
+        ContadorVocales
+
     }
 }
