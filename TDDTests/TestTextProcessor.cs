@@ -1,4 +1,4 @@
-﻿namespace TDDTests
+﻿namespace Tests
 {
     public class TestTextProcessor
     {

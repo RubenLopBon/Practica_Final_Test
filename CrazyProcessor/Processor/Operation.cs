@@ -27,5 +27,8 @@ namespace CrazyProcessor.Processor
 
         [Description("Invertir palabras separadas por mayúsculas")]
         InvertirPalabras,
+
+        [Description("Añade el numero de letras de una palabra al final de cada palabra")]
+        ContadorPorPalabra
     }
 }

@@ -23,8 +23,12 @@
 
                 case Operation.EliminarBlancos:
                     return this.EliminarBlancos(text);
+
                 case Operation.InvertirPalabras:
                     return this.InvertirPalabras(text);
+
+                case Operation.ContadorPorPalabra:
+                    return this.ContadorPorPalabra(text);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -168,5 +172,27 @@
         }
 
         //Ruben
+        private string ContadorPorPalabra(string text)
+        {
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            string[] palabras = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            int contador = 0;
+            string solution = "";
+            for (int i = 0; i < palabras.Length; i++)
+            {
+                for (int j = 0; j < palabras[i].Length; j++)
+                {
+                    if (char.IsLetter(palabras[i][j]))
+                    {
+                        contador++;
+                    }
+                }
+                solution += palabras[i] + ":"+ contador + " ";
+                contador = 0;
+            }
+            solution = solution.TrimEnd();
+            return solution;
+        }
+ 
     }
 }

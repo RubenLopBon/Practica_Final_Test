@@ -1,4 +1,4 @@
-﻿namespace TDDTests
+﻿namespace Tests
 {
     public class TestAppService
     {
@@ -47,14 +47,14 @@
 
         }
 
-        [Theory]
+        [Theory] // No hace falta probarlo todo, limitarlo
         [InlineData("paco@gmail.ex", "oca", new int [] {1, 1, 1, 1, 0, 0 , 1} )] //Todo bien
         [InlineData("fakemail", "oca", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //Mail mal Sale 2 veces... DUDA PROFE
         [InlineData("paco@gmail.ex", "fake", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //contrasena mal
         [InlineData("fakemail", "fake", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //contrasena y mail mal
-        [InlineData("q", "oca", new int[] { 3, 3, 0, 3, 3, 1, 8 })] //mail q no me convenven
+        [InlineData("q", "oca", new int[] { 3, 3, 0, 3, 3, 1, 8 })] //mail q no me convenven -- decirle a by que acabe las pruebas
         [InlineData("paco@gmail.ex", "q", new int[] { 3, 3, 0, 3, 3, 1, 8 })] //contrasena q
-        [InlineData("", "oca", new int[] { 1, 1, 1, 1, 0, 0, 1 })] //Todo bien
+        [InlineData("", "oca", new int[] { 1, 1, 1, 1, 0, 0, 1 })] //Todo bien   -- Igual poner un /n
         public void aaManageLogin_Multiple_Success(string email,string password,int [] repeticiones)
         {
             // ARRANGE 
