@@ -83,7 +83,7 @@
             ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
 
             //Mock<IAppService> AppService = new Mock<IAppService>();
-            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("q");
+            ConsoleAdapter.Setup(x => x.ReadFileName()).Exit(0);
 
             AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
                 FileProvider.Object, TextProcessor.Object);

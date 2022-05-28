@@ -30,7 +30,7 @@
         [InlineData("?")]
         [InlineData("💙")]
         [InlineData("♡")]
-        public void TextInverser_ExcepcionCaracterInvalido_Success(string texto)
+        public void TextInverser_CaracterInvalido_Excepcion(string texto)
         {
             // ARRANGE 
             var sut = new TextProcessor();
