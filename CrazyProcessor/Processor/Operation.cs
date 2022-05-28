@@ -22,6 +22,7 @@ namespace CrazyProcessor.Processor
         [Description("Encriptar el texto")]
         textEncrypter,
 
+
         [Description("Eliminar blancos con palabras en mayúsculas")]
         EliminarBlancos,
 
@@ -32,7 +33,10 @@ namespace CrazyProcessor.Processor
         ContadorPorPalabra,
 
         [Description("Muestra el numero de vocales")]
-        ContadorVocales
+        ContadorVocales,
+
+        [Description("número par de palabras, empiza y acaba con palabra par")]
+        makeItEven,
 
     }
 }

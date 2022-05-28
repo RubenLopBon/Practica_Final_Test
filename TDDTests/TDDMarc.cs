@@ -24,7 +24,7 @@ namespace TDDTests
             string resultado = sut.TextEncrypter(texto);
 
             //Assert 
-            Assert.Equal(resultado, resultadoEsperado);
+            Assert.Equal(resultadoEsperado, resultado);
         }
       
 
@@ -41,7 +41,45 @@ namespace TDDTests
             string resultado = sut.TextEncrypter(texto);
 
             //Assert 
-            Assert.Equal(resultado, resultadoEsperado);
+            Assert.Equal(resultadoEsperado, resultado);
+        }
+
+        [Theory]
+
+        [InlineData("hola que tal", "hola que tal even")]
+        [InlineData("tal que hola", "even tal que hola")]
+        public void makeItEven_EmpiezaYAcabaEnPar_Success(string texto, string resultadoEsperado)
+        {
+            //Arrange 
+            var sut = new TextProcessor();
+
+            //Act 
+            string resultado = sut.makeItEven(texto);
+
+            //Assert 
+            Assert.Equal(resultadoEsperado, resultado);
+        }
+        [Theory]
+        [InlineData("", "even MAKEITEVEN")]
+        [InlineData("  ", "even MAKEITEVEN")]
+        [InlineData("    ", "even MAKEITEVEN")]
+        [InlineData(" a  ", "even a even MAKEITEVEN")]
+        [InlineData("i  ", "even i even MAKEITEVEN")]
+        [InlineData("  u", "even u even MAKEITEVEN")]
+        [InlineData("a", "even a even MAKEITEVEN")]
+        [InlineData("hola", "hola MAKEITEVEN")]
+        [InlineData("hola que tal", "hola que tal even")]
+        [InlineData("tal que hola", "even tal que hola")]
+        public void makeItEven_NúmeroParPalabras_Success(string texto, string resultadoEsperado)
+        {
+            //Arrange 
+            var sut = new TextProcessor();
+
+            //Act 
+            string resultado = sut.makeItEven(texto);
+
+            //Assert 
+            Assert.Equal(resultadoEsperado, resultado);
         }
     }
 

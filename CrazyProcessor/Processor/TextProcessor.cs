@@ -11,13 +11,16 @@ namespace CrazyProcessor.Processor
             {
                 case Operation.ToLowerCase:
                     return this.ConvertToLowerCase(text);
+
                 case Operation.ToUpperCase:
                     return this.ConvertToUpperCase(text);
 
                 case Operation.ToCountCase:
                     return this.CountUpperAndLowerCase(text);
+
                 case Operation.ToTextInverser:
                     return this.TextInverser(text);
+
                 case Operation.WordCounter:
                     return this.WordCounter(text);
 
@@ -35,7 +38,10 @@ namespace CrazyProcessor.Processor
 
                 case Operation.ContadorVocales:
                     return this.ContadorVocales(text);
-                    
+            
+                case Operation.makeItEven:
+                    return this.makeItEven(text);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
@@ -91,6 +97,46 @@ namespace CrazyProcessor.Processor
 
         // ************************ FUNCIONALIDADES TDD EXTRAS OBLIGATORIAS ***********************
         //Marc
+
+
+       public string makeItEven(string text)
+        {
+            
+            string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            
+            int n = texts.Length;
+            
+            if(n == 0)
+            {
+                return "even MAKEITEVEN";
+            }
+
+            if (texts[0].Length % 2 != 0)
+            {
+                texts[0] = "even " + texts[0];
+            }
+
+            text = string.Join(" ", texts); 
+            texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            n = texts.Length;
+
+            if (texts[n-1].Length % 2 != 0 )
+            {
+                 texts[n-1] =  texts[n-1] + " even";
+            }
+
+            text = string.Join(" ", texts);
+            texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            n = texts.Length;
+
+            text = string.Join(" ", texts).Trim();
+            if (n % 2 != 0)
+            {
+                text = text + " MAKEITEVEN";
+            }
+            return text;    
+        }
+
 
         public string TextEncrypter(string text)
         {
