@@ -3,6 +3,69 @@
     public class TestTextProcessor
     {
         [Theory]
+       
+        [InlineData("probando texto test", "probando texto test")]
+        [InlineData("PROBANDO TEXTO TEST", "probando texto test")]
+        [InlineData("PrObAnDo TeXtO TeSt", "probando texto test")]
+        [InlineData("", "")]
+        [InlineData(" ", " ")]
+        [InlineData("  ", "  ")]
+        public void ToLowerCase_StringValido_Success(string texto, string resultadoEsperado)
+        {
+            // ARRANGE 
+            var sut = new TextProcessor();
+
+            // ACT
+            string resultado = sut.ProcessText(texto, Operation.ToLowerCase);
+
+            // ASSERT
+            Assert.Equal(resultadoEsperado, resultado);
+                
+        }
+
+        [Theory]
+
+        [InlineData("probando texto test", "PROBANDO TEXTO TEST")]
+        [InlineData("PROBANDO TEXTO TEST", "PROBANDO TEXTO TEST")]
+        [InlineData("PrObAnDo TeXtO TeSt", "PROBANDO TEXTO TEST")]
+        [InlineData("", "")]
+        [InlineData(" ", " ")]
+        [InlineData("  ", "  ")]
+        public void ToUpperCase_StringValido_Success(string texto, string resultadoEsperado)
+        {
+            // ARRANGE 
+            var sut = new TextProcessor();
+
+            // ACT
+            string resultado = sut.ProcessText(texto, Operation.ToUpperCase);
+
+            // ASSERT
+            Assert.Equal(resultadoEsperado, resultado);
+
+        }
+        [Theory]
+
+        [InlineData("", "0")]
+        [InlineData("hola", "1")]
+        [InlineData("probando contar test dos", "4")]
+        [InlineData("💔", "1")]
+        [InlineData("💔 hola que tal", "4")]
+        [InlineData(" ", "0")]
+        [InlineData("  ", "0")]
+        public void WordCounter_StringValido_Success(string texto, string resultadoEsperado)
+        {
+            // ARRANGE 
+            var sut = new TextProcessor();
+
+            // ACT
+            string resultado = sut.ProcessText(texto, Operation.WordCounter);
+
+            // ASSERT
+            Assert.Equal(resultadoEsperado, resultado);
+
+        }
+
+        [Theory]
         [InlineData("", "")]
         [InlineData(" ", " ")]
         [InlineData("   ", "   ")]
