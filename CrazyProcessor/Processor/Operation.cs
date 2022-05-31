@@ -19,9 +19,13 @@ namespace CrazyProcessor.Processor
         [Description("Contar palabras")]
         WordCounter,
 
+
+
+
+
+
         [Description("Encriptar el texto")]
         textEncrypter,
-
 
         [Description("Eliminar blancos con palabras en mayúsculas")]
         EliminarBlancos,

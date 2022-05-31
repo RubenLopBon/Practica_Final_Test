@@ -297,5 +297,36 @@
 
             // ASSERT
         }
+        [Fact]
+        public void bye()
+        {
+            // ARRANGE 
+            Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
+            Mock<IAuthService> AuthService = new Mock<IAuthService>();
+            Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
+            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
+
+            string email = "q";
+            ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
+            string password = "oca";
+            ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(password);
+
+            User usu = new User(email, password, "userExemple");
+            AuthService.Setup(x => x.Login(It.IsAny<string>(), It.IsAny<string>())).Returns(usu);
+
+            ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
+
+            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("a");
+
+            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
+                FileProvider.Object, TextProcessor.Object);
+
+            //Act
+            sut.StartApp();
+
+            //Assert
+            ConsoleAdapter.Verify(x => x.Bye(),
+                    Times.Exactly(1));
+        }
     }
 }
