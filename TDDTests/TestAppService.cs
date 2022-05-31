@@ -72,6 +72,52 @@
                     Times.Exactly(1));
         }
 
+        [Theory]
+        [InlineData("q", "algo", "algo.txt", "1")]
+        [InlineData("algo", "q", "algo.txt", "1")]
+        [InlineData("algo", "algo", "q", "1")]
+        [InlineData("algo", "algo", "algo.txt", "q")]
+        [InlineData("Q", "algo", "algo.txt", "1")]
+        [InlineData("algo", "Q", "algo.txt", "1")]
+        [InlineData("algo", "algo", "Q", "1")]
+        [InlineData("algo", "algo", "algo.txt", "Q")]
+        public void CheckExit_Q_Exit(string email, string password, string fichero, string operacion)
+        {
+            // ARRANGE 
+            Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
+            Mock<IAuthService> AuthService = new Mock<IAuthService>();
+            Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
+            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
+
+            ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
+            
+            ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(password);
+
+            User usu = new User(email, password, "paco");
+            AuthService.Setup(x => x.Login(It.IsAny<string>(), It.IsAny<string>())).Returns(usu);
+
+            ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
+
+            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns(fichero);
+            FileProvider.Setup(x => x.ReadFile(fichero)).Returns("asdasdassssss");
+
+            ConsoleAdapter.Setup(x => x.ShowOperations());
+            ConsoleAdapter.Setup(x => x.ChooseOperation()).Returns(operacion);
+            operacion = "q";
+
+            ConsoleAdapter.Setup(x => x.ShowResult(It.IsAny<string>()));
+            ConsoleAdapter.Setup(x => x.Bye()).Throws(new Exception("Bye"));
+
+            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
+                FileProvider.Object, TextProcessor.Object);
+
+            //Act
+            var exception = Assert.Throws<Exception>(() => sut.StartApp());
+
+            //Assert
+            Assert.Equal("Bye", exception.Message);
+        }
+
         /*
         [Theory] // No hace falta probarlo todo, limitarlo
         [InlineData("paco@gmail.ex", "oca", new int [] {1, 1, 1, 1, 0, 0 , 1} )] //Todo bien
@@ -325,6 +371,8 @@
             sut.StartApp();
 
             //Assert
+            //virficar que se llama al metodo bye al menos 1 vez
+
             ConsoleAdapter.Verify(x => x.Bye(),
                     Times.Exactly(1));
         }
