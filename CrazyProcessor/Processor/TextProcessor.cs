@@ -99,7 +99,7 @@ namespace CrazyProcessor.Processor
         //Marc
 
 
-       public string makeItEven(string text)
+       private String makeItEven(string text)
         {
             
             string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -138,7 +138,7 @@ namespace CrazyProcessor.Processor
         }
 
 
-        public string TextEncrypter(string text)
+        private String TextEncrypter(string text)
         {
 
             text = text.Replace("a", "i");

@@ -125,27 +125,6 @@
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
 
-        [Theory]
-        [InlineData(Operation.InvertirPalabras,"")]
-        [InlineData(Operation.ContadorPorPalabra, "a")]
-        [InlineData(Operation.WordCounter, "")]
-        [InlineData(Operation.EliminarBlancos, "")]
-        [InlineData(Operation.ContadorVocales, "")]
-        [InlineData(Operation.makeItEven, "")]
-        [InlineData(Operation.textEncrypter, "")]
-        [InlineData(Operation.ToCountCase, "")]
-        [InlineData(Operation.ToLowerCase, "")]
-        [InlineData(Operation.ToUpperCase, "")]
-        [InlineData(Operation.ToTextInverser, "")]
-
-        public void ProcessText_switchCases_success(Operation OP, string texto)
-        {
-            // ARRANGE 
-            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
-            
-            TextProcessor.Setup(x => x.ProcessText(texto, OP)).Returns(It.IsAny<string>());
-            //Assert
-          
-        }
+       
     }
 }

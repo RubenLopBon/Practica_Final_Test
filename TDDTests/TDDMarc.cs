@@ -21,7 +21,7 @@ namespace TDDTests
             var sut = new TextProcessor();
 
             //Act 
-            string resultado = sut.TextEncrypter(texto);
+            string resultado = sut.ProcessText(texto, Operation.textEncrypter);
 
             //Assert 
             Assert.Equal(resultadoEsperado, resultado);
@@ -38,7 +38,7 @@ namespace TDDTests
             var sut = new TextProcessor();
 
             //Act 
-            string resultado = sut.TextEncrypter(texto);
+            string resultado = sut.ProcessText(texto, Operation.textEncrypter);
 
             //Assert 
             Assert.Equal(resultadoEsperado, resultado);
@@ -50,11 +50,11 @@ namespace TDDTests
         [InlineData("tal que hola", "even tal que hola")]
         public void makeItEven_EmpiezaYAcabaEnPar_Success(string texto, string resultadoEsperado)
         {
-            //Arrange 
+            // ARRANGE 
             var sut = new TextProcessor();
 
-            //Act 
-            string resultado = sut.makeItEven(texto);
+            // ACT
+            string resultado = sut.ProcessText(texto, Operation.makeItEven);
 
             //Assert 
             Assert.Equal(resultadoEsperado, resultado);
@@ -76,7 +76,7 @@ namespace TDDTests
             var sut = new TextProcessor();
 
             //Act 
-            string resultado = sut.makeItEven(texto);
+            string resultado = sut.ProcessText(texto, Operation.makeItEven);
 
             //Assert 
             Assert.Equal(resultadoEsperado, resultado);
