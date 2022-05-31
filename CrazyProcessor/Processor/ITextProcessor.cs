@@ -9,5 +9,7 @@ namespace CrazyProcessor.Processor
     public interface ITextProcessor
     {
         string ProcessText(string text, Operation operation);
+        
+        
     }
 }

@@ -231,6 +231,9 @@ namespace CrazyProcessor.Processor
             string[] palabras = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
             int contador = 0;
             string solution = "";
+            
+            if (palabras.Length == 0) return "0";
+
             for (int i = 0; i < palabras.Length; i++)
             {
                 for (int j = 0; j < palabras[i].Length; j++)
