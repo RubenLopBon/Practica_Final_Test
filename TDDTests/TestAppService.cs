@@ -5,8 +5,7 @@
 
 
         [Fact]
-        //public void ManageLogin_UsuarioRegistradoYContraseñaCorrecta_Success()
-        public void ManageLogin_UsuarioRegistradoYContraseñaCorrecta_Success()
+        public void ManageLogin_EmailYContraseñaDeUsuarioRegistrado_Success()
         {
             // ARRANGE 
             Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
@@ -14,7 +13,7 @@
             Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
             Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
 
-            string email = "paco@gmail.ex";
+            string email = "pruebanoregis@test.es";
             ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
 
             string password = "oca";
@@ -25,28 +24,55 @@
 
             ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
 
-            //Mock<IAppService> AppService = new Mock<IAppService>();
             ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("q");
 
             AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
                 FileProvider.Object, TextProcessor.Object);
 
             //Act
-            //sut.ManageLogin();
             sut.StartApp();
+            
             //Assert
-            //Se puede mirar de separar en 3 tests
-            ConsoleAdapter.Verify(x => x.ReadEmail(),
-                    Times.Exactly(1));
-            ConsoleAdapter.Verify(x => x.ReadPassword(),
-                    Times.Exactly(1));
             ConsoleAdapter.Verify(x => x.WelcomeUser(It.IsAny<User>()),
                     Times.Exactly(1));
-            AuthService.Verify(x => x.Login(It.IsAny<string>(), It.IsAny<string>()),
-                    Times.Exactly(1));
-
         }
 
+        [Fact]
+        public void ManageLogin_EmailYContraseñaDeUsuarioNoRegistrado3Intentos_Error()
+        {
+            // ARRANGE 
+            Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
+            Mock<IAuthService> AuthService = new Mock<IAuthService>();
+            Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
+            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
+
+            string email = "pruebanoregis@test.es";
+            ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
+
+            string password = "oca";
+            ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(password);
+
+            User usu = new User(email, password, "paco");
+            AuthService.Setup(x => x.Login(It.IsAny<string>(), It.IsAny<string>())).Returns((User?)null);
+
+            ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
+
+            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("q");
+
+            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
+                FileProvider.Object, TextProcessor.Object);
+
+            //Act
+            sut.StartApp();
+
+            //Assert
+            ConsoleAdapter.Verify(x => x.WrongCredentials(),
+                    Times.Exactly(3));
+            ConsoleAdapter.Verify(x => x.TooManyAttempts(),
+                    Times.Exactly(1));
+        }
+
+        /*
         [Theory] // No hace falta probarlo todo, limitarlo
         [InlineData("paco@gmail.ex", "oca", new int [] {1, 1, 1, 1, 0, 0 , 1} )] //Todo bien
         [InlineData("fakemail", "oca", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //Mail mal Sale 2 veces... DUDA PROFE
@@ -108,35 +134,20 @@
             ConsoleAdapter.Verify(x => x.Bye(),
                     Times.Exactly(repeticiones[6]));
         }
+        */
 
         [Fact]
-        public void ManageLogin_EmailRegistradoYContraseñaIncorrecta_Success()
+        public void ManageLogin_EmailRegistradoYContraseñaIncorrecta_Success()//Hecho?
         {
-            // ARRANGE 
-            Mock<IAppService> AppService = new Mock<IAppService>();
-            // AppService sut = new AppService();
-
-            // ACT
-
-            // ASSERT
-
         }
 
         [Fact]
-        public void ManageLogin_EmailNoRegistrado_Error()
+        public void ManageLogin_EmailNoRegistrado_Error() //Hecho
         {
-            // ARRANGE 
-            Mock<IAppService> AppService = new Mock<IAppService>();
-            // AppService sut = new AppService();
-
-            // ACT
-
-            // ASSERT
-
         }
 
         [Fact]
-        public void ManageLogin_EmailNoRegistradoTresIntentos_Error()
+        public void ManageLogin_EmailNoRegistradoTresIntentos_Error()//Hecho
         {
             // ARRANGE 
             Mock<IAppService> AppService = new Mock<IAppService>();
@@ -151,26 +162,13 @@
         [Fact]
         public void ManageLogin_SinPonerEmail_Message()
         {
-            // ARRANGE 
-            Mock<IAppService> AppService = new Mock<IAppService>();
-            // AppService sut = new AppService();
-
-            // ACT
-
-            // ASSERT
 
         }
         public void ManageLogin_SinPonerContraseña_Message()
         {
-            // ARRANGE 
-            Mock<IAppService> AppService = new Mock<IAppService>();
-            // AppService sut = new AppService();
-
-            // ACT
-
-            // ASSERT
 
         }
+        
         // ********************************* MANAGE FILE PROCESSOR ********************************
         // ############# Test relacionados con la introducción del nombre del archivo #############
         [Fact]

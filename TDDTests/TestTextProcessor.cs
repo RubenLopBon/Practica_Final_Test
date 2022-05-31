@@ -66,6 +66,26 @@
         }
 
         [Theory]
+        [InlineData("", "El número de mayúsculas es: 0\nEl número de minúsculas es: 0")]
+        [InlineData("hOLa", "El número de mayúsculas es: 2\nEl número de minúsculas es: 2")]
+        [InlineData("PROBANDO contar tEsT Dos", "El número de mayúsculas es: 11\nEl número de minúsculas es: 10")]
+        [InlineData("💔", "El número de mayúsculas es: 0\nEl número de minúsculas es: 0")]
+        [InlineData("💔 hOLa que tal", "El número de mayúsculas es: 2\nEl número de minúsculas es: 8")]
+        [InlineData(" ", "El número de mayúsculas es: 0\nEl número de minúsculas es: 0")]
+        [InlineData("  ", "El número de mayúsculas es: 0\nEl número de minúsculas es: 0")]
+        public void CountUpperAndLowerCase_EntradaValida_Success(string texto, string resultadoEsperado)
+        {
+            //Arrange 
+            var sut = new TextProcessor();
+
+            //Act 
+            string resultado = sut.ProcessText(texto, Operation.ToCountCase);
+
+            //Assert 
+            Assert.Equal(resultado, resultadoEsperado);
+        }
+
+        [Theory]
         [InlineData("", "")]
         [InlineData(" ", " ")]
         [InlineData("   ", "   ")]
