@@ -103,7 +103,6 @@
 
             ConsoleAdapter.Setup(x => x.ShowOperations());
             ConsoleAdapter.Setup(x => x.ChooseOperation()).Returns(operacion);
-            operacion = "q";
 
             ConsoleAdapter.Setup(x => x.ShowResult(It.IsAny<string>()));
             ConsoleAdapter.Setup(x => x.Bye()).Throws(new Exception("Bye"));
