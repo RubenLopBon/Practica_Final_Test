@@ -115,109 +115,12 @@
 
             //Assert
             Assert.Equal("Bye", exception.Message);
-        }
-
-        /*
-        [Theory] // No hace falta probarlo todo, limitarlo
-        [InlineData("paco@gmail.ex", "oca", new int [] {1, 1, 1, 1, 0, 0 , 1} )] //Todo bien
-        [InlineData("fakemail", "oca", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //Mail mal Sale 2 veces... DUDA PROFE
-        [InlineData("paco@gmail.ex", "fake", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //contrasena mal
-        [InlineData("fakemail", "fake", new int[] { 3, 3, 0, 3, 3, 1, 2 })] //contrasena y mail mal
-        [InlineData("q", "oca", new int[] { 3, 3, 0, 3, 3, 1, 8 })] //mail q no me convenven -- decirle a by que acabe las pruebas
-        [InlineData("paco@gmail.ex", "q", new int[] { 3, 3, 0, 3, 3, 1, 8 })] //contrasena q
-        [InlineData("", "oca", new int[] { 1, 1, 1, 1, 0, 0, 1 })] //Todo bien   -- Igual poner un /n
-        public void aaManageLogin_Multiple_Success(string email,string password,int [] repeticiones)
-        {
-            // ARRANGE 
-            Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
-            Mock<IAuthService> AuthService = new Mock<IAuthService>();
-            Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
-            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
-
-            string emailRegistrado = "paco@gmail.ex";
-            ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
-
-            string passwordRegistrado = "oca";
-            ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(password);
-
-            User usu;
-            if (email == emailRegistrado && password == passwordRegistrado)
-            {
-                usu = new User(email, password, "paco");
-            }
-            else
-            {
-                usu = (User?)null;
-            }
-            AuthService.Setup(x => x.Login(It.IsAny<string>(), It.IsAny<string>())).Returns(usu);
-
-            ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
-
-            //Mock<IAppService> AppService = new Mock<IAppService>();
-            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("q");
-
-            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
-                FileProvider.Object, TextProcessor.Object);
-
-            //Act
-            //sut.ManageLogin();
-            sut.StartApp();
-            //Assert
-            //Se puede mirar de separar en 3 tests
-            ConsoleAdapter.Verify(x => x.ReadEmail(),
-                    Times.Exactly(repeticiones[0]));
-            ConsoleAdapter.Verify(x => x.ReadPassword(),
-                    Times.Exactly(repeticiones[1]));
-            ConsoleAdapter.Verify(x => x.WelcomeUser(It.IsAny<User>()),
-                    Times.Exactly(repeticiones[2]));
-            AuthService.Verify(x => x.Login(It.IsAny<string>(), It.IsAny<string>()),
-                    Times.Exactly(repeticiones[3]));
-            ConsoleAdapter.Verify(x => x.WrongCredentials(),
-                    Times.Exactly(repeticiones[4]));
-            ConsoleAdapter.Verify(x => x.TooManyAttempts(),
-                    Times.Exactly(repeticiones[5]));
-            ConsoleAdapter.Verify(x => x.Bye(),
-                    Times.Exactly(repeticiones[6]));
-        }
-        */
-
-        [Fact]
-        public void ManageLogin_EmailRegistradoYContraseñaIncorrecta_Success()//Hecho?
-        {
-        }
-
-        [Fact]
-        public void ManageLogin_EmailNoRegistrado_Error() //Hecho
-        {
-        }
-
-        [Fact]
-        public void ManageLogin_EmailNoRegistradoTresIntentos_Error()//Hecho
-        {
-            // ARRANGE 
-            Mock<IAppService> AppService = new Mock<IAppService>();
-            // AppService sut = new AppService();
-
-            // ACT
-
-            // ASSERT
-
-        }
-
-        [Fact]
-        public void ManageLogin_SinPonerEmail_Message()
-        {
-
-        }
-        public void ManageLogin_SinPonerContraseña_Message()
-        {
-
-        }
+        }     
         
         // ********************************* MANAGE FILE PROCESSOR ********************************
         // ############# Test relacionados con la introducción del nombre del archivo #############
         [Fact]
-        public void ManageFileProcessor_ExcepcionNombreArchivoNoExistente_Succes()
+        public void ManageFileProcessor_NombreArchivoNoExistente_Excepcion()
         {
             // ARRANGE 
             Mock<IAppService> AppService = new Mock<IAppService>();
@@ -253,7 +156,7 @@
             // ARRANGE 
             Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
             string email = "prueba@test.es", contraseña = "contraseña", nombre = "Laura",
-                nomArchivo = "example.txt", contenido = "Hola";
+                nomArchivo = "example.txt", contenido = "Hola", opcion = "1";
 
             ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
             ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(contraseña);
@@ -272,15 +175,20 @@
 
             Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
             // TextProcessor.Setup(x => x.ProcessText(contenido, (Operation)3));
+            
+            ConsoleAdapter.Setup(x => x.Bye()).Throws(new Exception("Bye"));
+            ConsoleAdapter.Setup(x => x.ChooseOperation()).Returns(opcion);
+            ConsoleAdapter.Setup(x => x.ShowResult(It.IsAny<string>())).Throws(new Exception("Resultado"));
+            
 
             var sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
                 FileProvider.Object, TextProcessor.Object);
 
-            // ACT
-            sut.StartApp();
+            //Act
+            var exception = Assert.Throws<Exception>(() => sut.StartApp());
 
-            // ASSERT
-            ConsoleAdapter.Verify(x => x.ShowOperations(), Times.Exactly(1));
+            //Assert
+            Assert.Equal("Resultado", exception.Message);
         }
 
         [Fact]
@@ -342,38 +250,6 @@
 
             // ASSERT
         }
-        [Fact]
-        public void bye()
-        {
-            // ARRANGE 
-            Mock<IConsoleAdapter> ConsoleAdapter = new Mock<IConsoleAdapter>();
-            Mock<IAuthService> AuthService = new Mock<IAuthService>();
-            Mock<IFileProvider> FileProvider = new Mock<IFileProvider>();
-            Mock<ITextProcessor> TextProcessor = new Mock<ITextProcessor>();
-
-            string email = "q";
-            ConsoleAdapter.Setup(x => x.ReadEmail()).Returns(email);
-            string password = "oca";
-            ConsoleAdapter.Setup(x => x.ReadPassword()).Returns(password);
-
-            User usu = new User(email, password, "userExemple");
-            AuthService.Setup(x => x.Login(It.IsAny<string>(), It.IsAny<string>())).Returns(usu);
-
-            ConsoleAdapter.Setup(x => x.WelcomeUser(It.IsAny<User>()));
-
-            ConsoleAdapter.Setup(x => x.ReadFileName()).Returns("a");
-
-            AppService sut = new AppService(ConsoleAdapter.Object, AuthService.Object,
-                FileProvider.Object, TextProcessor.Object);
-
-            //Act
-            sut.StartApp();
-
-            //Assert
-            //virficar que se llama al metodo bye al menos 1 vez
-
-            ConsoleAdapter.Verify(x => x.Bye(),
-                    Times.Exactly(1));
-        }
+       
     }
 }
