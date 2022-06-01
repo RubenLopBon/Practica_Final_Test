@@ -130,7 +130,5 @@
             // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
-
-       
     }
 }

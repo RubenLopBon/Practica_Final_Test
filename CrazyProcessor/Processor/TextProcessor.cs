@@ -47,7 +47,6 @@ namespace CrazyProcessor.Processor
             }
         }
 
-        //Profe
         private string ConvertToLowerCase(string text)
         {
             return text.ToLowerInvariant();
@@ -98,8 +97,6 @@ namespace CrazyProcessor.Processor
         // ************************ FUNCIONALIDADES TDD EXTRAS OBLIGATORIAS ***********************
         //Marc
 
-
-
         private String makeItEven(string text)
         {
 
@@ -138,7 +135,6 @@ namespace CrazyProcessor.Processor
             return text;
         }
 
-
         private String TextEncrypter(string text)
         {
 
@@ -165,9 +161,6 @@ namespace CrazyProcessor.Processor
 
             return string.Join(" ", texts).Trim();
         }
-
-
-
 
         private string EliminarBlancos(string texto) // LAURA //
         {
@@ -228,7 +221,7 @@ namespace CrazyProcessor.Processor
             return frase.Trim();
         }
 
-        //Ruben
+        //TDD Ruben
         private string ContadorPorPalabra(string text)
         {
             char[] delimiters = new char[] { ' ', '\r', '\n' };
