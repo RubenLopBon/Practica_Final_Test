@@ -10,6 +10,9 @@
         [InlineData("", "")]
         [InlineData(" ", " ")]
         [InlineData("  ", "  ")]
+        [InlineData("probando", "probando")]
+        [InlineData("PROBANDO", "probando")]
+        [InlineData("PrObAnDo", "probando")]
         public void ToLowerCase_StringValido_Success(string texto, string resultadoEsperado)
         {
             // ARRANGE 
@@ -31,6 +34,9 @@
         [InlineData("", "")]
         [InlineData(" ", " ")]
         [InlineData("  ", "  ")]
+        [InlineData("probando", "PROBANDO")]
+        [InlineData("PROBANDO", "PROBANDO")]
+        [InlineData("PrObAnDo", "PROBANDO")]
         public void ToUpperCase_StringValido_Success(string texto, string resultadoEsperado)
         {
             // ARRANGE 
