@@ -26,13 +26,13 @@ namespace TDDTests
             //Assert 
             Assert.Equal(resultadoEsperado, resultado);
         }
-      
+
 
         [Theory]
         [InlineData("hola que tal", "hili qii TIL")]
         [InlineData("test 123 // i %&", "tist 123 // i %&")]
         [InlineData("a a e i o", "i i I i I")]
-        public void TextEncrypter_ParesEnMayuscula_Success(string texto, string resultadoEsperado)
+        public void TextEncrypter_palabrasParesEnMayuscula_Success(string texto, string resultadoEsperado)
         {
             //Arrange 
             var sut = new TextProcessor();
@@ -45,21 +45,6 @@ namespace TDDTests
         }
 
         [Theory]
-
-        [InlineData("hola que tal", "hola que tal even")]
-        [InlineData("tal que hola", "even tal que hola")]
-        public void makeItEven_EmpiezaYAcabaEnPar_Success(string texto, string resultadoEsperado)
-        {
-            // ARRANGE 
-            var sut = new TextProcessor();
-
-            // ACT
-            string resultado = sut.ProcessText(texto, Operation.makeItEven);
-
-            //Assert 
-            Assert.Equal(resultadoEsperado, resultado);
-        }
-        [Theory]
         [InlineData("", "even MAKEITEVEN")]
         [InlineData("  ", "even MAKEITEVEN")]
         [InlineData("    ", "even MAKEITEVEN")]
@@ -68,8 +53,14 @@ namespace TDDTests
         [InlineData("  u", "even u even MAKEITEVEN")]
         [InlineData("a", "even a even MAKEITEVEN")]
         [InlineData("hola", "hola MAKEITEVEN")]
-        [InlineData("hola que tal", "hola que tal even")]
-        [InlineData("tal que hola", "even tal que hola")]
+
+        [InlineData("tal que tall", "even tal que tall")]
+        [InlineData("tall que tal", "tall que tal even")]
+        [InlineData("tall que tall", "tall que tall MAKEITEVEN")]
+
+        [InlineData("tal que que tall", "even tal que que tall MAKEITEVEN")]
+        [InlineData("tall que que tal", "tall que que tal even MAKEITEVEN")]
+        [InlineData("tall que hola tall", "tall que hola tall")]
         public void makeItEven_NúmeroParPalabras_Success(string texto, string resultadoEsperado)
         {
             //Arrange 

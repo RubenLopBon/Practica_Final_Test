@@ -99,14 +99,15 @@ namespace CrazyProcessor.Processor
         //Marc
 
 
-       private String makeItEven(string text)
+
+        private String makeItEven(string text)
         {
-            
+
             string[] texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            
+
             int n = texts.Length;
-            
-            if(n == 0)
+
+            if (n == 0)
             {
                 return "even MAKEITEVEN";
             }
@@ -116,13 +117,13 @@ namespace CrazyProcessor.Processor
                 texts[0] = "even " + texts[0];
             }
 
-            text = string.Join(" ", texts); 
+            text = string.Join(" ", texts);
             texts = text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
             n = texts.Length;
 
-            if (texts[n-1].Length % 2 != 0 )
+            if (texts[n - 1].Length % 2 != 0)
             {
-                 texts[n-1] =  texts[n-1] + " even";
+                texts[n - 1] = texts[n - 1] + " even";
             }
 
             text = string.Join(" ", texts);
@@ -134,7 +135,7 @@ namespace CrazyProcessor.Processor
             {
                 text = text + " MAKEITEVEN";
             }
-            return text;    
+            return text;
         }
 
 
@@ -164,6 +165,9 @@ namespace CrazyProcessor.Processor
 
             return string.Join(" ", texts).Trim();
         }
+
+
+
 
         private string EliminarBlancos(string texto) // LAURA //
         {
