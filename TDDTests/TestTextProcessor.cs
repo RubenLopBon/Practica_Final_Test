@@ -130,5 +130,15 @@
             // ASSERT
             Assert.Equal("Conjunto de palabras incorrecto", exception.Message);
         }
+
+        [Fact]
+        public void ProcessText_OperacionInvalida_Excepcion()
+        {
+            // ARRANGE 
+            var sut = new TextProcessor();
+
+            //ACT y ASSERT
+            Assert.Throws<ArgumentOutOfRangeException>(() => sut.ProcessText("", (Operation)12));
+        }
     }
 }
